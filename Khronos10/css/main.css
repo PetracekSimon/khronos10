@@ -1083,6 +1083,7 @@ header .social-links ul li a:focus {
   position: relative;
 }
 .main-content-tablecell {
+  padding-top: 13%;
   display: table-cell;
   vertical-align: bottom;
   z-index: 700;
