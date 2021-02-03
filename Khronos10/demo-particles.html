@@ -35,6 +35,10 @@
   </head>
 
   <body id="top">
+    <div class="alert d-none">
+      <span class="closebtn">&times;</span>
+      <span id="alertText"></span>
+    </div>
     <!-- header 
    ================================================== -->
     <header>
@@ -49,10 +53,6 @@
     <!-- home
    ================================================== -->
     <section id="home" class="home-particles">
-      <div class="alert d-none">
-        <span class="closebtn">&times;</span>
-        <span id="alertText"></span>
-      </div>
       <div class="shadow-overlay"></div>
 
       <div class="content-wrap-table">
@@ -61,7 +61,7 @@
             <div class="col-twelve">
               <div id="counter">
                 <div class="half">
-                  <span>Připravujeme pro Vás nový e-shop</span>
+                  <span id="mainTitle">Připravujeme pro Vás nový e-shop</span>
                 </div>
               </div>
 
@@ -69,6 +69,12 @@
                 <label for="fname" class="produkty"
                   >O jaké produkty byste měli zájem?</label
                 >
+                <input
+                  type="email"
+                  id="femail"
+                  name="email"
+                  placeholder="Zadejte váš email."
+                />
                 <input
                   type="text"
                   id="fname"
@@ -80,6 +86,7 @@
               </div>
               <style>
                 input[type="text"],
+                input[type="email"],
                 select {
                   width: 100%;
                   padding: 12px 20px;
@@ -115,6 +122,11 @@
                   color: #fff;
                   font-size: 20px;
                 }
+                @media only screen and (max-width: 920px) {
+                  span#mainTitle {
+                    font-size: 10vw !important;
+                  }
+                }
               </style>
             </div>
             <!-- /twelve -->
@@ -138,10 +150,11 @@
     <script src="js/main.js"></script>
     <script>
       let sendEmailBtn = document.querySelector("#sendEmailBtn");
-	  let alertPopup = document.querySelector(".alert");
-	  let alertText = document.querySelector("#alertText")
+      let alertPopup = document.querySelector(".alert");
+      let alertText = document.querySelector("#alertText");
       let closebtn = document.querySelector(".closebtn");
-      let input = document.querySelector("#fname");
+      let inputProduct = document.querySelector("#fname");
+      let inputEmail = document.querySelector("#femail");
 
       sendEmailBtn.addEventListener("click", sendEmail);
       closebtn.addEventListener("click", () =>
@@ -151,18 +164,19 @@
       function sendEmail(params) {
         $.post(
           "http://localhost:3030/sendEmail",
-          { product: input.value },
+          { product: inputProduct.value, email: inputEmail.value },
           function (data, status) {
             if (status === "success") {
-              console.log(data);
               alertPopup.classList.remove("d-none");
-			  alertPopup.classList.add("success");
-			  alertText.innerText = "Váš návrh byl úspěšně odeslán děkujeme."
-              input.value = "";
+              alertPopup.classList.add("success");
+              alertText.innerText = "Váš návrh byl úspěšně odeslán děkujeme.";
+              inputProduct.value = "";
+              inputEmail.value = "";
             } else {
               alertPopup.classList.remove("d-none");
-			  alertPopup.classList.add("warning");
-			  alertText.innerText = "Něco se pokazilo.. Prosím zkuste váš požadavek odeslat později."
+              alertPopup.classList.add("warning");
+              alertText.innerText =
+                "Něco se pokazilo.. Prosím zkuste váš požadavek odeslat později.";
             }
           }
         );

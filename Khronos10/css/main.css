@@ -501,8 +501,8 @@ select {
 textarea {
   min-height: 25rem;
 }
-.d-none{
-	display: none !important;
+.d-none {
+  display: none !important;
 }
 body .alert {
   padding: 20px;
@@ -512,6 +512,7 @@ body .alert {
   transition: opacity 0.6s;
   margin-bottom: 15px;
   display: none;
+  z-index: 1000;
 }
 
 body .alert.success {
@@ -525,12 +526,13 @@ body .alert.success {
 }
 
 body .alert.warning {
-	background-color: #f44336;
-	display: block;
-	max-width: 600px;
-	position: relative;
-	margin: 0 auto 20px;
-  }
+  background-color: #f44336;
+  display: block;
+  max-width: 600px;
+  position: relative;
+  margin: 0 auto 20px;
+  z-index: 1000;
+}
 body .closebtn {
   margin-left: 15px;
   color: white;
@@ -874,7 +876,7 @@ header {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 700;
+  z-index: 601;
 }
 header .row {
   height: auto;
@@ -886,10 +888,17 @@ header .row {
  * header logo - (_layout.css) 
  * ------------------------------------------------------------------- */
 header .logo {
-  position: absolute;
-  left: 26px;
-  top: 0;
-  margin-top: 78px;
+  margin-top: 7%;
+}
+@media only screen and (max-width: 410px) {
+  header .logo {
+    margin-top: 0;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .main-content-tablecell .row {
+    padding-bottom: 30px !important;
+  }
 }
 header .logo a {
   display: block;
@@ -897,10 +906,12 @@ header .logo a {
   padding: 0;
   outline: 0;
   border: none;
-  width: 290px;
+  width: 100%;
   height: 177px;
   background: url("../images/dafit_logo.png") no-repeat center;
-  background-size: 354px 177px;
+  /* background-size: 354px 177px; */
+  background-size: contain;
+  background-position: left;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
@@ -953,45 +964,18 @@ header .social-links ul li a:focus {
  * header section 
  * ------------------------------------------------------------------- */
 @media only screen and (max-width: 1024px) {
-  header .logo {
-    left: 24px;
-    margin-top: 42px;
-  }
-  header .logo a {
-    width: 90px;
-    height: 78px;
-    background-size: 90px 78px;
-  }
   header .social-links {
     right: 18px;
     top: 54px;
   }
 }
 @media only screen and (max-width: 768px) {
-  header .logo {
-    left: 51px;
-    margin-top: 36px;
-  }
-  header .logo a {
-    width: 80px;
-    height: 70px;
-    background-size: 80px 70px;
-  }
   header .social-links {
     right: 45px;
     top: 48px;
   }
 }
 @media only screen and (max-width: 600px) {
-  header .logo {
-    left: 41px;
-    margin-top: 30px;
-  }
-  header .logo a {
-    width: 70px;
-    height: 61px;
-    background-size: 70px 61px;
-  }
   header .social-links {
     right: 41px;
     top: 42px;
@@ -1001,9 +985,6 @@ header .social-links ul li a:focus {
   }
 }
 @media only screen and (max-width: 500px) {
-  header .logo {
-    left: 35px;
-  }
   header .social-links {
     right: 35px;
   }
@@ -1015,15 +996,6 @@ header .social-links ul li a:focus {
   }
 }
 @media only screen and (max-width: 380px) {
-  header .logo {
-    left: 30px;
-    margin-top: 30px;
-  }
-  header .logo a {
-    width: 60px;
-    height: 52px;
-    background-size: 60px 52px;
-  }
   header .social-links ul {
     font-size: 2rem;
   }
